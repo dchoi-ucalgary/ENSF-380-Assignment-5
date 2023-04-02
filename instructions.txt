@@ -16,13 +16,24 @@ They also mentioned the following specifications:
 - It is not possible to have more than two visitor licences registered for a single day (per household)
 - It isn't possible to register a date in the past
 
-They added the warning that when you implement the new functionality, the existing tests around resident licences should break.  Their advice was to simply remove those tests which describe obsolete functionality (being able to manipulate more than one resident licence), but use the rest of the tests to ensure that you don't change anything else by accident.
+They added the warning that when you implement the new functionality, 
+the existing tests around resident licences should break.  
+Their advice was to simply remove those tests which describe obsolete functionality 
+(being able to manipulate more than one resident licence), but use the rest of the tests to ensure that you don't change anything else by accident.
 
-The senior developer suggested that you store information about parking using a HashMap, where each key corresponds to a normalized licence, and each value is a TreeSet of LocalDate objects associated with only the starting dates of reservations for just that licence, ordered later to earlier (e.g., 2024-01-01 comes before 2020-12-30).  They made a few extra tests related to the implementation, BonusTest.java. If you decide to use this data structure, you'll need to name it 'parkingRecord' and supply a getter for it.  If you choose not to follow this implementation, you don't need to provide a getter for the data structure in VisitorParking.
+The senior developer suggested that you store information about parking using a HashMap, 
+where each key corresponds to a normalized licence, 
+and each value is a TreeSet of LocalDate objects associated with only the starting dates of reservations for just that licence, 
+ordered later to earlier (e.g., 2024-01-01 comes before 2020-12-30).  
+They made a few extra tests related to the implementation, BonusTest.java. 
+If you decide to use this data structure, you'll need to name it 'parkingRecord' and supply a getter for it.  
+If you choose not to follow this implementation, you don't need to provide a getter for the data structure in VisitorParking.
 
 ** Note **
 
-Do not include any libraries which are not being used. In particular, including testing libraries in non-testing files (e.g., importing Junit or Hamcrest in VisitorParking) can cause confusion in the autograder, even if it works on the command-line. (This is because build systems such as Maven and Gradle separate test files from other files and do not expect to encounter tests outside of the testing folder.)
+Do not include any libraries which are not being used. In particular, including testing libraries in non-testing files 
+(e.g., importing Junit or Hamcrest in VisitorParking) can cause confusion in the autograder, even if it works on the command-line. 
+(This is because build systems such as Maven and Gradle separate test files from other files and do not expect to encounter tests outside of the testing folder.)
 
 ** Tips **
 
