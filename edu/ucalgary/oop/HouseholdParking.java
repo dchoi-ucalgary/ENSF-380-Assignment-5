@@ -11,7 +11,9 @@ import java.util.*;
 public class HouseholdParking extends CalgaryProperty {
     // Each residental property is allowed one street parking permit
     private LinkedList<String> residentLicence = new LinkedList<String>();
-    private int maxLicences = 3;
+    private int maxLicences = 1;
+
+    private VisitorParking visitors = new VisitorParking();
 
     public HouseholdParking(int taxRollNumber, String zoning, String streetName, int buildingNumber, String postCode, String buildingAnnex) throws IllegalArgumentException {
         super(taxRollNumber,zoning,streetName,buildingNumber,postCode,buildingAnnex);
@@ -86,10 +88,51 @@ public class HouseholdParking extends CalgaryProperty {
      * Get all the licences stored for the resident
      * @return An array containing the resident's licences
     */
-    public String[] getResidentLicence() {
-       String result[] = this.residentLicence.toArray(new String[maxLicences]);
-       return result;
+    public String getResidentLicence() {
+        String result;
+        try{
+            result = this.residentLicence.getFirst();
+        } catch (NoSuchElementException e) {
+            result = "";
+        }
+        return result;
+    }
+ 
+    public ArrayList<String> getLicencesRegisteredForDate(){
+        return visitors.getLicencesRegisteredForDate();
     }
 
+    public ArrayList<String> getLicencesRegisteredForDate(LocalDate date){
+        return visitors.getLicencesRegisteredForDate(date);
+    }
+ 
+    public boolean licenceIsRegisteredForDate(String licence){
+        return visitors.licenceIsRegisteredForDate(licence);
+    }
+
+    public boolean licenceIsRegisteredForDate(String licence, LocalDate date){
+        return visitors.licenceIsRegisteredForDate(licence, date);
+    }
+ 
+    public ArrayList<LocalDate> getAllDaysLicenceIsRegistered(String licence){
+        return visitors.getAllDaysLicenceIsRegistered(licence);
+    }
+
+    public ArrayList<LocalDate> getStartDaysLicenceIsRegistered(String licence){
+        return visitors.getStartDaysLicenceIsRegistered(licence);
+    }
+ 
+    public void addVisitorReservation(String licence){
+        visitors.addVisitorReservation(licence);
+    }
+
+    public void addVisitorReservation(String licence, LocalDate date){
+        visitors.addVisitorReservation(licence, date);
+    }
+ 
+     public VisitorParking getVisitors() {
+        return visitors;
+    }
+ 
 }
 
